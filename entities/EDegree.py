@@ -2,6 +2,6 @@ from enum import Enum
 
 
 class EDegree(Enum):
-    BACHELOR = 1
-    MASTER = 2
-    DOCTOR = 3
+    BACHELOR = "1"
+    MASTER = "2"
+    DOCTOR = "3"

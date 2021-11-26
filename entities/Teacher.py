@@ -3,11 +3,16 @@ from entities.EDegree import EDegree
 
 
 class Teacher(Employees):
-    def __init__(self, faculty, degree):
+    __faculty = ""
+    __degree = EDegree.BACHELOR
+    __teachingHours = 0
+
+    def __init__(self):
         super().__init__()
-        self.__faculty = faculty
-        self.__degree = EDegree.MASTER
-        self.__teachingHours = degree
+
+        # self.__faculty = faculty
+        # self.__degree = EDegree.MASTER
+        # self.__teachingHours = degree
 
     @property
     def degree(self, degree):
@@ -17,13 +22,33 @@ class Teacher(Employees):
             self.__degree = degree
 
     def getSalary(self):
-        sal = self.__salaryRatio * 730 + self.__allowance + self.__teachingHours * 45
-        return sal
+        sal = self._Employees__salaryRatio * 730 + \
+            self._Employees__allowance +\
+            self.__teachingHours * 45
+        return str(sal)
 
-    def toString(self):
-        return self.__name + ", " +\
-            self.__salaryRatio + ", " +\
-            self.__allowance + ", " +\
+    @staticmethod
+    def validateDegree(degree):
+        if degree == EDegree.BACHELOR:
+            return "BACHELOR"
+        elif degree == EDegree.MASTER:
+            return "MASTER"
+        else:
+            return "DOCTOR"
+
+    def __str__(self):
+        return self._Employees__name + ", " +\
             self.__faculty + ", " +\
-            self.__degree + ", " +\
-            self.__teachingHours
+            self.validateDegree(self.__degree) + ", " +\
+            str(self._Employees__salaryRatio) + ", " +\
+            str(self._Employees__allowance) + ", " +\
+            str(self.__teachingHours) + ", " +\
+            self.getSalary()
+        # self.__degree + ", " +\
+
+    def getStr(self):
+        return self._Employees__name + "," +\
+            self.__faculty + "," +\
+            self.validateDegree(self.__degree) + "," +\
+            str(self._Employees__salaryRatio) + "," +\
+            str(self.__teachingHours) + ","
